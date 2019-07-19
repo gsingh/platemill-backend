@@ -2,6 +2,7 @@ package com.pmill.vuejs.web.rest;
 
 import com.pmill.vuejs.PmillApp;
 import com.pmill.vuejs.domain.Normalising;
+import com.pmill.vuejs.domain.ShiftManager;
 import com.pmill.vuejs.repository.NormalisingRepository;
 import com.pmill.vuejs.web.rest.errors.ExceptionTranslator;
 
@@ -94,6 +95,16 @@ public class NormalisingResourceIT {
             .shift(DEFAULT_SHIFT)
             .noOfPlates(DEFAULT_NO_OF_PLATES)
             .normalisedTonnage(DEFAULT_NORMALISED_TONNAGE);
+        // Add required entity
+        ShiftManager shiftManager;
+        if (TestUtil.findAll(em, ShiftManager.class).isEmpty()) {
+            shiftManager = ShiftManagerResourceIT.createEntity(em);
+            em.persist(shiftManager);
+            em.flush();
+        } else {
+            shiftManager = TestUtil.findAll(em, ShiftManager.class).get(0);
+        }
+        normalising.setManager(shiftManager);
         return normalising;
     }
     /**
@@ -108,6 +119,16 @@ public class NormalisingResourceIT {
             .shift(UPDATED_SHIFT)
             .noOfPlates(UPDATED_NO_OF_PLATES)
             .normalisedTonnage(UPDATED_NORMALISED_TONNAGE);
+        // Add required entity
+        ShiftManager shiftManager;
+        if (TestUtil.findAll(em, ShiftManager.class).isEmpty()) {
+            shiftManager = ShiftManagerResourceIT.createUpdatedEntity(em);
+            em.persist(shiftManager);
+            em.flush();
+        } else {
+            shiftManager = TestUtil.findAll(em, ShiftManager.class).get(0);
+        }
+        normalising.setManager(shiftManager);
         return normalising;
     }
 

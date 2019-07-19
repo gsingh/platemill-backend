@@ -40,7 +40,8 @@ public class HeavyPlateFinished implements Serializable {
     @Column(name = "h_p_finished_tonnage")
     private Integer hPFinishedTonnage;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties("hpFinishes")
     private ShiftManager manager;
 

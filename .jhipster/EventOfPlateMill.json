@@ -30,7 +30,7 @@
             "relationshipName": "videoOfEvent"
         }
     ],
-    "changelogDate": "20190718201505",
+    "changelogDate": "20190719103440",
     "entityTableName": "event_of_plate_mill",
     "dto": "no",
     "pagination": "no",

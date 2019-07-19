@@ -40,7 +40,8 @@ public class Production implements Serializable {
     @Column(name = "prod_tonnage")
     private Integer prodTonnage;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties("prods")
     private ShiftManager manager;
 

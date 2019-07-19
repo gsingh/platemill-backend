@@ -40,7 +40,8 @@ public class Normalising implements Serializable {
     @Column(name = "normalised_tonnage")
     private Integer normalisedTonnage;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties("normaliseds")
     private ShiftManager manager;
 

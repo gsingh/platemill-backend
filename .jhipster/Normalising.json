@@ -30,11 +30,12 @@
             "relationshipType": "many-to-one",
             "otherEntityName": "shiftManager",
             "otherEntityRelationshipName": "normalised",
+            "relationshipValidateRules": "required",
             "relationshipName": "manager",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
-    "changelogDate": "20190718201510",
+    "changelogDate": "20190719103445",
     "entityTableName": "normalising",
     "dto": "no",
     "pagination": "no",

@@ -49,7 +49,7 @@
             "relationshipName": "shipping"
         }
     ],
-    "changelogDate": "20190718201508",
+    "changelogDate": "20190719103443",
     "entityTableName": "shift_manager",
     "dto": "no",
     "pagination": "no",

@@ -30,11 +30,12 @@
             "relationshipType": "many-to-one",
             "otherEntityName": "shiftManager",
             "otherEntityRelationshipName": "hpFinish",
+            "relationshipValidateRules": "required",
             "relationshipName": "manager",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
-    "changelogDate": "20190718201509",
+    "changelogDate": "20190719103444",
     "entityTableName": "heavy_plate_finished",
     "dto": "no",
     "pagination": "no",

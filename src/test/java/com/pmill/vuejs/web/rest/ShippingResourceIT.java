@@ -2,6 +2,7 @@ package com.pmill.vuejs.web.rest;
 
 import com.pmill.vuejs.PmillApp;
 import com.pmill.vuejs.domain.Shipping;
+import com.pmill.vuejs.domain.ShiftManager;
 import com.pmill.vuejs.repository.ShippingRepository;
 import com.pmill.vuejs.web.rest.errors.ExceptionTranslator;
 
@@ -98,6 +99,16 @@ public class ShippingResourceIT {
             .noOfWagons(DEFAULT_NO_OF_WAGONS)
             .noOfTrailers(DEFAULT_NO_OF_TRAILERS)
             .shippedTonnage(DEFAULT_SHIPPED_TONNAGE);
+        // Add required entity
+        ShiftManager shiftManager;
+        if (TestUtil.findAll(em, ShiftManager.class).isEmpty()) {
+            shiftManager = ShiftManagerResourceIT.createEntity(em);
+            em.persist(shiftManager);
+            em.flush();
+        } else {
+            shiftManager = TestUtil.findAll(em, ShiftManager.class).get(0);
+        }
+        shipping.setManager(shiftManager);
         return shipping;
     }
     /**
@@ -113,6 +124,16 @@ public class ShippingResourceIT {
             .noOfWagons(UPDATED_NO_OF_WAGONS)
             .noOfTrailers(UPDATED_NO_OF_TRAILERS)
             .shippedTonnage(UPDATED_SHIPPED_TONNAGE);
+        // Add required entity
+        ShiftManager shiftManager;
+        if (TestUtil.findAll(em, ShiftManager.class).isEmpty()) {
+            shiftManager = ShiftManagerResourceIT.createUpdatedEntity(em);
+            em.persist(shiftManager);
+            em.flush();
+        } else {
+            shiftManager = TestUtil.findAll(em, ShiftManager.class).get(0);
+        }
+        shipping.setManager(shiftManager);
         return shipping;
     }
 

@@ -24,10 +24,10 @@
             "otherEntityName": "eventOfPlateMill",
             "otherEntityRelationshipName": "pictureOfEvent",
             "relationshipName": "eventPM",
-            "otherEntityField": "id"
+            "otherEntityField": "eventName"
         }
     ],
-    "changelogDate": "20190718201506",
+    "changelogDate": "20190719103441",
     "entityTableName": "picture_of_event",
     "dto": "no",
     "pagination": "no",

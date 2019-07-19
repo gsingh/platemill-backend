@@ -43,7 +43,8 @@ public class Shipping implements Serializable {
     @Column(name = "shipped_tonnage")
     private Integer shippedTonnage;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties("shippings")
     private ShiftManager manager;
 

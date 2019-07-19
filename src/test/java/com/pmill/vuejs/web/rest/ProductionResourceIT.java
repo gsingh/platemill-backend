@@ -2,6 +2,7 @@ package com.pmill.vuejs.web.rest;
 
 import com.pmill.vuejs.PmillApp;
 import com.pmill.vuejs.domain.Production;
+import com.pmill.vuejs.domain.ShiftManager;
 import com.pmill.vuejs.repository.ProductionRepository;
 import com.pmill.vuejs.web.rest.errors.ExceptionTranslator;
 
@@ -94,6 +95,16 @@ public class ProductionResourceIT {
             .shift(DEFAULT_SHIFT)
             .noOfPlates(DEFAULT_NO_OF_PLATES)
             .prodTonnage(DEFAULT_PROD_TONNAGE);
+        // Add required entity
+        ShiftManager shiftManager;
+        if (TestUtil.findAll(em, ShiftManager.class).isEmpty()) {
+            shiftManager = ShiftManagerResourceIT.createEntity(em);
+            em.persist(shiftManager);
+            em.flush();
+        } else {
+            shiftManager = TestUtil.findAll(em, ShiftManager.class).get(0);
+        }
+        production.setManager(shiftManager);
         return production;
     }
     /**
@@ -108,6 +119,16 @@ public class ProductionResourceIT {
             .shift(UPDATED_SHIFT)
             .noOfPlates(UPDATED_NO_OF_PLATES)
             .prodTonnage(UPDATED_PROD_TONNAGE);
+        // Add required entity
+        ShiftManager shiftManager;
+        if (TestUtil.findAll(em, ShiftManager.class).isEmpty()) {
+            shiftManager = ShiftManagerResourceIT.createUpdatedEntity(em);
+            em.persist(shiftManager);
+            em.flush();
+        } else {
+            shiftManager = TestUtil.findAll(em, ShiftManager.class).get(0);
+        }
+        production.setManager(shiftManager);
         return production;
     }
 
