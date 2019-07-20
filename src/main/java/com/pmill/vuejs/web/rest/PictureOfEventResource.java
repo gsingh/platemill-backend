@@ -16,9 +16,14 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-
+import org.apache.commons.io.FileUtils;
+import java.nio.file.Files;
+import java.io.File;
+import java.io.IOException;
 /**
  * REST controller for managing {@link com.pmill.vuejs.domain.PictureOfEvent}.
  */
@@ -52,7 +57,16 @@ public class PictureOfEventResource {
         if (pictureOfEvent.getId() != null) {
             throw new BadRequestAlertException("A new pictureOfEvent cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        byte[] file = pictureOfEvent.getImgFile();
         PictureOfEvent result = pictureOfEventRepository.save(pictureOfEvent);
+
+        if(file != null) {
+            try {
+                FileUtils.writeByteArrayToFile(new File("/gurmeet/uploads/" + result.getId() + ".jpg"), file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
         return ResponseEntity.created(new URI("/api/picture-of-events/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -72,6 +86,35 @@ public class PictureOfEventResource {
         log.debug("REST request to update PictureOfEvent : {}", pictureOfEvent);
         if (pictureOfEvent.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if(pictureOfEvent.getImgFile() != null) {
+
+            Path existing = Paths.get("/gurmeet/uploads/" + pictureOfEvent.getId() + ".jpg");
+
+            if (Files.exists(existing)) {
+
+                try {
+
+                    Files.delete(existing);
+
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+
+                }
+
+            }
+
+            try {
+
+                FileUtils.writeByteArrayToFile(new File("/gurmeet/uploads/" + pictureOfEvent.getId() + ".pdf"), pictureOfEvent.getImgFile());
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+
+            }
+
         }
         PictureOfEvent result = pictureOfEventRepository.save(pictureOfEvent);
         return ResponseEntity.ok()
