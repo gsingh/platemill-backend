@@ -40,26 +40,26 @@ public class EventOfPlateMillResource {
     }
 
     /**
-     * {@code POST  /event-of-plate-mills} : Create a new eventOfPlateMill.
+     * {@code POST  /eventOfPlateMills} : Create a new eventOfPlateMill.
      *
      * @param eventOfPlateMill the eventOfPlateMill to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new eventOfPlateMill, or with status {@code 400 (Bad Request)} if the eventOfPlateMill has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/event-of-plate-mills")
+    @PostMapping("/eventOfPlateMills")
     public ResponseEntity<EventOfPlateMill> createEventOfPlateMill(@Valid @RequestBody EventOfPlateMill eventOfPlateMill) throws URISyntaxException {
         log.debug("REST request to save EventOfPlateMill : {}", eventOfPlateMill);
         if (eventOfPlateMill.getId() != null) {
             throw new BadRequestAlertException("A new eventOfPlateMill cannot already have an ID", ENTITY_NAME, "idexists");
         }
         EventOfPlateMill result = eventOfPlateMillRepository.save(eventOfPlateMill);
-        return ResponseEntity.created(new URI("/api/event-of-plate-mills/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/eventOfPlateMills/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * {@code PUT  /event-of-plate-mills} : Updates an existing eventOfPlateMill.
+     * {@code PUT  /eventOfPlateMills} : Updates an existing eventOfPlateMill.
      *
      * @param eventOfPlateMill the eventOfPlateMill to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated eventOfPlateMill,
@@ -67,7 +67,7 @@ public class EventOfPlateMillResource {
      * or with status {@code 500 (Internal Server Error)} if the eventOfPlateMill couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/event-of-plate-mills")
+    @PutMapping("/eventOfPlateMills")
     public ResponseEntity<EventOfPlateMill> updateEventOfPlateMill(@Valid @RequestBody EventOfPlateMill eventOfPlateMill) throws URISyntaxException {
         log.debug("REST request to update EventOfPlateMill : {}", eventOfPlateMill);
         if (eventOfPlateMill.getId() == null) {
@@ -80,23 +80,23 @@ public class EventOfPlateMillResource {
     }
 
     /**
-     * {@code GET  /event-of-plate-mills} : get all the eventOfPlateMills.
+     * {@code GET  /eventOfPlateMills} : get all the eventOfPlateMills.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of eventOfPlateMills in body.
      */
-    @GetMapping("/event-of-plate-mills")
+    @GetMapping("/eventOfPlateMills")
     public List<EventOfPlateMill> getAllEventOfPlateMills() {
         log.debug("REST request to get all EventOfPlateMills");
         return eventOfPlateMillRepository.findAll();
     }
 
     /**
-     * {@code GET  /event-of-plate-mills/:id} : get the "id" eventOfPlateMill.
+     * {@code GET  /eventOfPlateMills/:id} : get the "id" eventOfPlateMill.
      *
      * @param id the id of the eventOfPlateMill to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the eventOfPlateMill, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/event-of-plate-mills/{id}")
+    @GetMapping("/eventOfPlateMills/{id}")
     public ResponseEntity<EventOfPlateMill> getEventOfPlateMill(@PathVariable Long id) {
         log.debug("REST request to get EventOfPlateMill : {}", id);
         Optional<EventOfPlateMill> eventOfPlateMill = eventOfPlateMillRepository.findById(id);
@@ -104,12 +104,12 @@ public class EventOfPlateMillResource {
     }
 
     /**
-     * {@code DELETE  /event-of-plate-mills/:id} : delete the "id" eventOfPlateMill.
+     * {@code DELETE  /eventOfPlateMills/:id} : delete the "id" eventOfPlateMill.
      *
      * @param id the id of the eventOfPlateMill to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/event-of-plate-mills/{id}")
+    @DeleteMapping("/eventOfPlateMills/{id}")
     public ResponseEntity<Void> deleteEventOfPlateMill(@PathVariable Long id) {
         log.debug("REST request to delete EventOfPlateMill : {}", id);
         eventOfPlateMillRepository.deleteById(id);

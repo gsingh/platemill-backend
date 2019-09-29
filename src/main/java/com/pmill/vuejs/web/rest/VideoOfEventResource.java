@@ -40,26 +40,26 @@ public class VideoOfEventResource {
     }
 
     /**
-     * {@code POST  /video-of-events} : Create a new videoOfEvent.
+     * {@code POST  /videoOfEvents} : Create a new videoOfEvent.
      *
      * @param videoOfEvent the videoOfEvent to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new videoOfEvent, or with status {@code 400 (Bad Request)} if the videoOfEvent has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/video-of-events")
+    @PostMapping("/videoOfEvents")
     public ResponseEntity<VideoOfEvent> createVideoOfEvent(@Valid @RequestBody VideoOfEvent videoOfEvent) throws URISyntaxException {
         log.debug("REST request to save VideoOfEvent : {}", videoOfEvent);
         if (videoOfEvent.getId() != null) {
             throw new BadRequestAlertException("A new videoOfEvent cannot already have an ID", ENTITY_NAME, "idexists");
         }
         VideoOfEvent result = videoOfEventRepository.save(videoOfEvent);
-        return ResponseEntity.created(new URI("/api/video-of-events/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/videoOfEvents/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * {@code PUT  /video-of-events} : Updates an existing videoOfEvent.
+     * {@code PUT  /videoOfEvents} : Updates an existing videoOfEvent.
      *
      * @param videoOfEvent the videoOfEvent to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated videoOfEvent,
@@ -67,7 +67,7 @@ public class VideoOfEventResource {
      * or with status {@code 500 (Internal Server Error)} if the videoOfEvent couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/video-of-events")
+    @PutMapping("/videoOfEvents")
     public ResponseEntity<VideoOfEvent> updateVideoOfEvent(@Valid @RequestBody VideoOfEvent videoOfEvent) throws URISyntaxException {
         log.debug("REST request to update VideoOfEvent : {}", videoOfEvent);
         if (videoOfEvent.getId() == null) {
@@ -80,23 +80,23 @@ public class VideoOfEventResource {
     }
 
     /**
-     * {@code GET  /video-of-events} : get all the videoOfEvents.
+     * {@code GET  /videoOfEvents} : get all the videoOfEvents.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of videoOfEvents in body.
      */
-    @GetMapping("/video-of-events")
+    @GetMapping("/videoOfEvents")
     public List<VideoOfEvent> getAllVideoOfEvents() {
         log.debug("REST request to get all VideoOfEvents");
         return videoOfEventRepository.findAll();
     }
 
     /**
-     * {@code GET  /video-of-events/:id} : get the "id" videoOfEvent.
+     * {@code GET  /videoOfEvents/:id} : get the "id" videoOfEvent.
      *
      * @param id the id of the videoOfEvent to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the videoOfEvent, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/video-of-events/{id}")
+    @GetMapping("/videoOfEvents/{id}")
     public ResponseEntity<VideoOfEvent> getVideoOfEvent(@PathVariable Long id) {
         log.debug("REST request to get VideoOfEvent : {}", id);
         Optional<VideoOfEvent> videoOfEvent = videoOfEventRepository.findById(id);
@@ -104,12 +104,12 @@ public class VideoOfEventResource {
     }
 
     /**
-     * {@code DELETE  /video-of-events/:id} : delete the "id" videoOfEvent.
+     * {@code DELETE  /videoOfEvents/:id} : delete the "id" videoOfEvent.
      *
      * @param id the id of the videoOfEvent to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/video-of-events/{id}")
+    @DeleteMapping("/videoOfEvents/{id}")
     public ResponseEntity<Void> deleteVideoOfEvent(@PathVariable Long id) {
         log.debug("REST request to delete VideoOfEvent : {}", id);
         videoOfEventRepository.deleteById(id);
