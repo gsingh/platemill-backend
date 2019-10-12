@@ -24,6 +24,7 @@ import org.apache.commons.io.FileUtils;
 import java.nio.file.Files;
 import java.io.File;
 import java.io.IOException;
+
 /**
  * REST controller for managing {@link com.pmill.vuejs.domain.PictureOfEvent}.
  */
@@ -58,15 +59,19 @@ public class PictureOfEventResource {
             throw new BadRequestAlertException("A new pictureOfEvent cannot already have an ID", ENTITY_NAME, "idexists");
         }
         byte[] file = pictureOfEvent.getImgFile();
-        PictureOfEvent result = pictureOfEventRepository.save(pictureOfEvent);
+        log.debug("REST request to save PictureOfEvent : {}", file);
+        
 
         if(file != null) {
             try {
-                FileUtils.writeByteArrayToFile(new File("/gurmeet/uploads/" + result.getId() + ".jpg"), file);
+                FileUtils.writeByteArrayToFile(new File("/sapper-my-app/static/pictures/" + pictureOfEvent.getImgFileContentType()), file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
         }
+
+        PictureOfEvent result = pictureOfEventRepository.save(pictureOfEvent);
+
         return ResponseEntity.created(new URI("/api/picture-of-events/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
