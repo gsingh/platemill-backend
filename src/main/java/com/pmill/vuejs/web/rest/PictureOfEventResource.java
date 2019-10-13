@@ -69,7 +69,7 @@ public class PictureOfEventResource {
                     e.printStackTrace();
                 }
         }
-
+        pictureOfEvent.setImgFile(null);
         PictureOfEvent result = pictureOfEventRepository.save(pictureOfEvent);
 
         return ResponseEntity.created(new URI("/api/picture-of-events/" + result.getId()))

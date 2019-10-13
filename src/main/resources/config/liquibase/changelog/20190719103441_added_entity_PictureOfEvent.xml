@@ -17,7 +17,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="pic_date" type="date">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
 
             <column name="img_type" type="varchar(255)">
@@ -25,7 +25,7 @@
             </column>
 
             <column name="img_file" type="longblob">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="img_file_content_type" type="varchar(255)">
                 <constraints nullable="false" />

@@ -31,7 +31,7 @@ public class PictureOfEvent implements Serializable {
 
     
     @Lob
-    @Column(name = "img_file", nullable = false)
+    @Column(name = "img_file", nullable = true)
     private byte[] imgFile;
 
     @Column(name = "img_file_content_type", nullable = false)
